@@ -12,10 +12,14 @@ import {toast} from "sonner";
 import FormField from "@/components/FormField";
 import {useRouter} from "next/navigation";
 import render from "next/dist/compiled/@vercel/og/og";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
+import { auth } from "@/firebase/client";
+import {signIn, signUp} from "@/lib/actions/auth.action";
 //new verison of toast from shadcn
 
 
 
+type FormType = 'sign-in' | 'sign-up';
 
 const formSchema = z.object({
     username: z.string().min(2).max(50),
@@ -45,23 +49,91 @@ const AuthForm = ({ type }:{ type:FormType }) => {
     })
 
     // 2. Define a submit handler.
-    function onSubmit(values: z.infer<typeof formSchema>) {
-        // Do something with the form values.
+    // function onSubmit= async(values: z.infer<typeof formSchema>)=> {
+    //     // Do something with the form values.
+    //
+    //     try{
+    //         if(type === "sign-up"){
+    //             const { name, email, password } = values;
+    //
+    //             const userCredentials=await createUserWithEmailAndPassword(auth, email, password);
+    //
+    //             const result=await signUp({
+    //                 uid:userCredentials.user.uid,
+    //                 name:name!,
+    //                 email,
+    //                 password,
+    //             })
+    //
+    //             if(!result.success){
+    //                 toast.error(result.message);
+    //                 return;
+    //             }
+    //             toast.success("Sign up successfully. Please Sign In. ");
+    //             router.push("/sign-in");
+    //         }else{
+    //
+    //             const { email, password } = values;
+    //             const userCredential=await signInWithEmailAndPassword(auth, email,password);
+    //             const idToken=await userCredential.user.getIdToken();
+    //
+    //             if(!idToken){
+    //                 toast.error('Sign In Failed. Please try again.');
+    //                 return;
+    //             }
+    //
+    //             await signIn({
+    //                 email, idToken
+    //             })
+    //             toast.success("Sign in successfully.");
+    //             router.push("/");
+    //         }
+    //     }catch(error){
+    //         console.log(error);
+    //         toast.error(`There was an error: ${error}`);
+    //     }
+    //
+    // }
+// 2. Define a submit handler.
+    const onSubmit = async (values: z.infer<typeof formSchema>) => {
+        try {
+            if (type === "sign-up") {
+                const { name, email, password } = values;
 
-        try{
-            if(type === "sign-up"){
-                toast.success("Sign up successfully. Please Sign In. ");
+                const userCredentials = await createUserWithEmailAndPassword(auth, email, password);
+
+                const result = await signUp({
+                    uid: userCredentials.user.uid,
+                    name: name!,
+                    email,
+                });
+
+                if (!result.success) {
+                    toast.error(result.message);
+                    return;
+                }
+
+                toast.success("Sign up successfully. Please Sign In.");
                 router.push("/sign-in");
-            }else{
+            } else {
+                const { email, password } = values;
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const idToken = await userCredential.user.getIdToken();
+
+                if (!idToken) {
+                    toast.error("Sign In Failed. Please try again.");
+                    return;
+                }
+
+                await signIn({ email, idToken });
                 toast.success("Sign in successfully.");
                 router.push("/");
             }
-        }catch(error){
+        } catch (error) {
             console.log(error);
             toast.error(`There was an error: ${error}`);
         }
-
-    }
+    };
 
     const isSignIn=type === "sign-in";
 

@@ -17,7 +17,14 @@ const Page = () => {
                 </Button>
             </div>
 
-            <Image src="/img_1.png" alt="robo-dude" width={400} height={400} className="max-sm:hidden rounded-2xl shadow-xl hover:scale-105 transition-transform duration-300 ease-in-out border-[6px] border-white outline outline-[3px] outline-white/70 shadow-[0_0_20px_5px_rgba(255,255,255,0.5)]" />
+            <Image
+                src="/img_1.png"
+                alt="robo-dude"
+                width={0}
+                height={0}
+                sizes="(max-width: 720px) 100vw, 400px"
+                className="w-full max-w-[400px] h-auto rounded-2xl border-[6px] border-white outline outline-[3px] outline-white/70 shadow-[0_0_20px_5px_rgba(255,255,255,0.5)] hover:scale-105 transition-transform duration-300 ease-in-out"
+            />
         </section>
 
             <section className="flex flex-col gap-6 mt-8 ">
