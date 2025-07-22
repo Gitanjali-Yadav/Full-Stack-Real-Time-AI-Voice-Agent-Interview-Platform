@@ -258,6 +258,50 @@ export async function getCurrentUser(): Promise<User | null> {
         return null;
     }
 }
+// ✅ Updated getCurrentUser
+// export async function getCurrentUser(): Promise<User | null> {
+//     const session = cookies().get("session"); // call inside the function
+//     const sessionCookie = session?.value;
+//
+//     if (!sessionCookie) return null;
+//
+//     try {
+//         const decodedClaims = await auth.verifySessionCookie(sessionCookie, true);
+//
+//         const userRecord = await db
+//             .collection("users")
+//             .doc(decodedClaims.uid)
+//             .get();
+//
+//         if (!userRecord.exists) return null;
+//
+//         return {
+//             ...userRecord.data(),
+//             id: userRecord.id,
+//         } as User;
+//     } catch (e) {
+//         console.error("Failed to get current user:", e);
+//         return null;
+//     }
+// }
+
+// import { cookies } from "next/headers";
+// import { decryptSession } from "./utils"; // your session utility if applicable
+// import type { User } from "@/types";
+
+// export async function getCurrentUser(): Promise<User | null> {
+//     const cookieStore = await cookies();
+//     const session = cookieStore.get("session");
+//
+//     const sessionCookie = session?.value;
+//
+//     if (!sessionCookie) return null;
+//
+//     // Decrypt or parse your session as needed
+//     const user = await decryptSession(sessionCookie);
+//     return user;
+// }
+
 
 // Check if User is Authenticated
 export async function isAuthenticated() {
