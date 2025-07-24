@@ -20,6 +20,15 @@ interface SavedMessage {
     role: "user" | "system" | "assistant";
     content: string;
 }
+interface AgentProps {
+    userName: string;
+    userId: string;
+    type: string;
+    workflowId: string;
+    interviewId?: string;
+    feedbackId?: string;
+    questions?: string[];
+}
 
 const Agent = ({
                    userName,
@@ -120,8 +129,12 @@ const Agent = ({
         if (type === "generate") {
             await vapi.start(process.env.NEXT_PUBLIC_VAPI_WORKFLOW_ID!, {
                 variableValues: {
-                    username: userName,
-                    userid: userId,
+                    userId: userId,
+                    userName: userName,
+                    type: type,
+                    interviewId: interviewId ?? "",
+                    feedbackId: feedbackId ?? "",
+                    questions: questions ?? [],
                 },
             });
         } else {
