@@ -38,9 +38,9 @@ Thank you! <3`,
 
         await db.collection("interviews").add(interview);
 
-        return NextResponse.json({ success: true }, { status: 200 });
-    } catch (error: any) {
+        return Response.json({ success: true }, { status: 200 });
+    } catch (error) {
         console.error("Error generating questions:", error);
-        return NextResponse.json({ success: false, message: error.message ?? 'Something went wrong' }, { status: 500 });
+        return Response.json({ success: false, error }, { status: 500 });
     }
 }

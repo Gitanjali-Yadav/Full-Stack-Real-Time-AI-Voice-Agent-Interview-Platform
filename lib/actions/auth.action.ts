@@ -359,11 +359,11 @@ export async function signUp(params: SignUpParams) {
             success: true,
             message: "Account created successfully. Please sign in.",
         };
-    } catch (error: any) {
-        console.error("Error creating user:", error);
+    } catch (e: any) {
+        console.error("Error creating user:", e);
 
         // Handle Firebase specific errors
-        if (error.code === "auth/email-already-exists") {
+        if (e.code === "auth/email-already-exists") {
             return {
                 success: false,
                 message: "This email is already in use",
@@ -389,8 +389,8 @@ export async function signIn(params: SignInParams) {
             };
 
         await setSessionCookie(idToken);
-    } catch (error: any) {
-        console.log("");
+    } catch (e) {
+        console.log(e);
 
         return {
             success: false,
