@@ -63,6 +63,10 @@ import { isAuthenticated } from "@/lib/actions/auth.action";
 
 const Layout = async ({ children }: { children: ReactNode }) => {
     const isUserAuthenticated = await isAuthenticated();
+    if (isUserAuthenticated === null) {
+        return <p>Checking authentication...</p>;
+    }
+
     if (!isUserAuthenticated) redirect("/sign-in");
 
     return (

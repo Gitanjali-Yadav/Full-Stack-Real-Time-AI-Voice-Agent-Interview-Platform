@@ -68,6 +68,7 @@ import DisplayTechIcons from "./DisplayTechIcons";
 
 import { cn, getRandomInterviewCover } from "@/lib/utils";
 import { getFeedbackByInterviewId } from "@/lib/actions/general.action";
+import {InterviewCardProps} from "@/types";
 
 const InterviewCard = async ({
                                  interviewId,

@@ -401,7 +401,7 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
         vapi.on("error", onError);
 
         return () => {
-            vapi.stop();
+            vapi.stop();//opt
             vapi.off("call-start", onCallStart);
             vapi.off("call-end", onCallEnd);
             vapi.off("message", onMessage);
@@ -413,7 +413,7 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
 
     useEffect(() => {
         if (callStatus === CallStatus.FINISHED) router.push("/");
-    }, [callStatus]);
+    }, [messages, callStatus, type, userId]);
 
     const handleCall = async () => {
         setCallStatus(CallStatus.CONNECTING);
@@ -467,6 +467,8 @@ const Agent = ({ userName, userId, type }: AgentProps) => {
                             height={540}
                             className="rounded-full object-cover size-[120px]"
                         />
+                        {isSpeaking && <span className="animate-speak" />}
+
                         <h3>{userName}</h3>
                     </div>
                 </div>

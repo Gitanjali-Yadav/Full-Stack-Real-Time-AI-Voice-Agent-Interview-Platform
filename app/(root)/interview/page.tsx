@@ -138,14 +138,53 @@
 //
 // export default InterviewDetails;
 
-import React from 'react'
+//initial
+// import React from 'react'
+// import Agent from "@/components/Agent";
+// import {getCurrentUser} from "@/lib/actions/auth.action";
+// const Page = async () => {
+//     const user = await getCurrentUser();
+//     return (
+//         <>
+//             <h3>Interview Generation</h3>
+//             <Agent userName={user?.name} userId={user?.id} type="generate" />
+//         </>
+//     )
+// }
+// export default Page
+
+//chatgpt code
+import React from "react";
 import Agent from "@/components/Agent";
-const Page = () => {
+import { getCurrentUser } from "@/lib/actions/auth.action";
+
+const Page = async () => {
+    const user = await getCurrentUser();
+
+    if (!user?.id) {
+        return (
+            <div className="text-center mt-10">
+                <h2 className="text-xl font-semibold text-white">
+                    You must be logged in.
+                </h2>
+                <a
+                    href="/sign-in"
+                    className="text-yellow-400 underline mt-2 inline-block"
+                >
+                    Go to Sign In
+                </a>
+            </div>
+        );
+    }
+
     return (
-        <>
-            <h3>Interview Generation</h3>
-            <Agent userName="You" userId="user1" type="generate" />
-        </>
-    )
-}
-export default Page
+        <div className="flex flex-col gap-6 p-4">
+            <h3 className="text-2xl font-bold text-white">
+                🎯 Interview Generation
+            </h3>
+            <Agent userName={user.name} userId={user.id} type="generate" />
+        </div>
+    );
+};
+
+export default Page;
