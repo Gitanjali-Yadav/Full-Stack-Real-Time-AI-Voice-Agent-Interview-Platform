@@ -312,6 +312,7 @@
 
 import { auth, db } from "@/firebase/admin";
 import { cookies } from "next/headers";
+import {GetLatestInterviewsParams, Interview, SignInParams, SignUpParams, User} from "@/types";
 
 // Session duration (1 week)
 const SESSION_DURATION = 60 * 60 * 24 * 7;
