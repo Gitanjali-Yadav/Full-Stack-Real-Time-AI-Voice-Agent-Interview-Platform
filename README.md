@@ -4,7 +4,7 @@
 
   
 
-🔗 **Try it now:** [CrackIT AI - ## 🌍 Live Demo](https://full-stack-real-time-ai-voice-agent-five.vercel.app/) 
+🔗 **Try it now:** [CrackIT AI - 🌍 Live Demo](https://full-stack-real-time-ai-voice-agent-five.vercel.app/) 
 ---
 
 ## 🧩 Table of Contents  
