@@ -2,9 +2,9 @@
 
 ### 🚀 An AI-powered platform for real-time, voice-based interview practice using VAPI, Next.js, and Firebase  
 
-## 🌍 Live Demo  
+  
 
-🔗 **Try it now:** [CrackIT AI - Live Demo](https://full-stack-real-time-ai-voice-agent-five.vercel.app/) 
+🔗 **Try it now:** [CrackIT AI - ## 🌍 Live Demo](https://full-stack-real-time-ai-voice-agent-five.vercel.app/) 
 ---
 
 ## 🧩 Table of Contents  
